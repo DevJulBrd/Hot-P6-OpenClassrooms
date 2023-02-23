@@ -6,6 +6,12 @@ const userRoutes = require('./routes/user');
 const dotenv = require('dotenv');
 const result = dotenv.config();
 const path = require('path');
+const rateLimit = require('express-rate-limit');
+const limiter = rateLimit({
+  max: 200,
+  windowMs: 60 * 60 * 1000,
+  message: "Vous effectuez trop de requête vers la base de donnée. Celà peut s'apparenter à du spam"
+});
 
 
 
@@ -25,6 +31,7 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 app.use('/image', express.static(path.join(__dirname, 'image')));
+app.use(limiter);
 
 app.use('/api/auth', userRoutes);
 app.use('/api/auth', userRoutes);
