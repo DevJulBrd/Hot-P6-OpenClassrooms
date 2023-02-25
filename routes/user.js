@@ -1,10 +1,18 @@
+// Import express
 const express = require('express');
 const router = express.Router();
 
+// Import controllers
 const userCtrl = require('../controllers/user');
 
-router.post('/signup', userCtrl.signup);
-router.post('/login', userCtrl.login);
+//Import middleware
+const limiter = require('../middleware/rate-limit');
+
+
+// Root signup
+router.post('/signup', limiter, userCtrl.signup);
+// Root login
+router.post('/login', limiter, userCtrl.login);
 
 
 module.exports = router;

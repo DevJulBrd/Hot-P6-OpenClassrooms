@@ -1,6 +1,8 @@
+// Import package
 const jwt = require('jsonwebtoken');
 
 
+// To know if user is authorized
 module.exports = (req, res, next) => {
     try{
         const token = req.headers.authorization.split(' ')[1];

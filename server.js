@@ -1,6 +1,9 @@
+// Import http
 const http = require('http');
+// Import app file
 const app = require('./app');
 
+// Using PORT
 const normalizePort = val => {
   const port = parseInt(val, 10);
 
@@ -15,6 +18,7 @@ const normalizePort = val => {
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
+// Connection management
 const errorHandler = error => {
   if (error.syscall !== 'listen') {
     throw error;
